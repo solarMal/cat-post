@@ -1,0 +1,1 @@
+![Database schema](diagrams/cat_schema.png)
