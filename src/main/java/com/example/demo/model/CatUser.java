@@ -10,9 +10,9 @@ import lombok.*;
 @ToString
 @Builder
 public class CatUser {
-   long id;
-   String userName;
-   String nickName;
+   private long id;
+   private String userName;
+   private String nickName;
 
    public CatUser(String userName, String nickName) {
       this.userName = userName;

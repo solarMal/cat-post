@@ -1,1 +1,1 @@
-![Database schema](diagrams/cat_schema.png)
+![Database schema](diagrams/catandpostDB.png)

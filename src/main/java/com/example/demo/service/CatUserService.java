@@ -1,44 +1,32 @@
 package com.example.demo.service;
 
+import com.example.demo.dao.UserDao;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.exception.ValidateException;
 import com.example.demo.model.CatUser;
-import com.example.demo.storage.catuser.CatUserStorage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
 public class CatUserService {
-    CatUserStorage userStorage;
+    private final UserDao userDao;
 
     @Autowired
-    public CatUserService(CatUserStorage userStorage) {
-        this.userStorage = userStorage;
+    public CatUserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public Optional<CatUser> findUserById(long id) {
+        return userDao.findUserById(id);
     }
 
     public CatUser createUser(CatUser catUser) {
         validateUser(catUser);
-        return userStorage.createUser(catUser);
-    }
-
-    public CatUser updateUser(CatUser catUser) {
-        validateUser(catUser);
-        return userStorage.updateUser(catUser);
-    }
-
-    public List<CatUser> getAllUsers() {
-        return userStorage.getAllUsers();
-    }
-
-    public CatUser getUserById(long id) {
-        return userStorage.getUserById(id);
-    }
-
-    public void deleteUserById(long id) {
-        userStorage.deleteUserById(id);
+        return userDao.createUser(catUser);
     }
 
     private void validateUser(CatUser user) {

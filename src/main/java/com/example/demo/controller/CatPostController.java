@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Slf4j
@@ -20,29 +21,8 @@ public class CatPostController {
         this.postService = postService;
     }
 
-    @PostMapping
-    public CatPost createPost(@RequestBody CatPost catPost) {
-        return postService.createPost(catPost);
-    }
-
-    @PutMapping
-    public CatPost updatePost(@RequestBody CatPost catPost) {
-        return postService.updatePost(catPost);
-    }
-
-    @GetMapping("/{id}")
-    public CatPost getPostById(@PathVariable long id) {
-        return postService.getPostById(id);
-    }
-
-    @GetMapping
-    public List<CatPost> getAllPosts() {
-        return postService.getAllPosts();
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePostById(@PathVariable long id) {
-        postService.deletePostById(id);
+    @GetMapping("/user/{id}")
+    public Collection<CatPost> findAll(@PathVariable long id) {
+        return postService.findPostsByUser(id);
     }
 }
